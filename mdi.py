@@ -45,6 +45,7 @@ def mdi(model, X_train, y_train, X_test, y_test=None):
     coef = pd.DataFrame(np.corrcoef(X), index=X.index, columns=X.index)
     coef_tr_te = coef.loc[X_train.index, X_test.index]
     mdi = pd.Series(dtype="float64")
+    y_cal_tr = pd.Series(model.predict(X_train).reshape(-1), index=y_train.index)
 
     for j in X_test.index:
         r = coef_tr_te[j].idxmax()
